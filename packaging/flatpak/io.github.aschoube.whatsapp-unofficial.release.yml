@@ -56,7 +56,7 @@ modules:
       - type: git
         url: https://github.com/aschoube/whatsapp-unofficial.git
         tag: v0.1.0
-        commit: 42da6ce774e481b86aa431fe409ac1c4610481c9
+        commit: a834822ad890a2ba68552fded0135d1e0720c5ad
         dest: src
       - type: file
         path: whatsapp-unofficial.sh
