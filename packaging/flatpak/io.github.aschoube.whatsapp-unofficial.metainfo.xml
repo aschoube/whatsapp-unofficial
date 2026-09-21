@@ -24,17 +24,14 @@
   <url type="bugtracker">https://github.com/aschoube/whatsapp-unofficial/issues</url>
   <url type="vcs-browser">https://github.com/aschoube/whatsapp-unofficial</url>
 
-  <!-- Flathub rejects submissions with no screenshot. These URLs must resolve
-       to real PNGs before the submission PR is opened; commit the files to
-       docs/screenshots/ on main. -->
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/conversation.png</image>
-      <caption>A conversation open in the desktop window</caption>
+      <image>https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/window.png</image>
+      <caption>The desktop window, signed out</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/tray.png</image>
-      <caption>Unread badge on the system tray icon</caption>
+      <image>https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/settings.png</image>
+      <caption>Tray behaviour, downloads and multiple accounts</caption>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1">

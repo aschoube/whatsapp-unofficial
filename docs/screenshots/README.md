@@ -5,12 +5,13 @@ AppStream metainfo in `packaging/flatpak/` points at this directory by tag:
 
     https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/<name>.png
 
-Expected files:
+Current files (captured against a throwaway profile, so no real account
+appears in them):
 
 | File                | Shows                                    |
 | ------------------- | ---------------------------------------- |
-| `conversation.png`  | A conversation open in the desktop window |
-| `tray.png`          | The unread badge on the tray icon         |
+| `window.png`        | The desktop window, signed out            |
+| `settings.png`      | Tray, download and account settings       |
 
 Requirements:
 
