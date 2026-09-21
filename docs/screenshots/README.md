@@ -6,7 +6,8 @@ AppStream metainfo in `packaging/flatpak/` points at this directory by tag:
     https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/<name>.png
 
 Current files (captured against a throwaway profile, so no real account
-appears in them):
+appears in them). The pairing QR is blurred so nothing scannable is
+published:
 
 | File                | Shows                                    |
 | ------------------- | ---------------------------------------- |
