@@ -13,7 +13,7 @@ depends=('gtk3' 'nss' 'libxss' 'alsa-lib' 'libnotify' 'libsecret' 'at-spi2-core'
 optdepends=('libappindicator-gtk3: system tray support on GNOME')
 options=('!strip')
 source=("$_pkgname-$pkgver.tar.gz::$url/releases/download/v$pkgver/$_pkgname-$pkgver-linux-x64.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('768ea0a6277056327c9c7416584da5ed299ff9d0272c35a22aaf4466609a0c38')
 
 package() {
   install -dm755 "$pkgdir/opt/$_pkgname"
