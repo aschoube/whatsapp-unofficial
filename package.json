@@ -1,0 +1,91 @@
+{
+  "name": "whatsapp-unofficial",
+  "productName": "WhatsApp Unofficial",
+  "version": "0.1.0",
+  "description": "An unofficial desktop client for WhatsApp Web on Linux",
+  "license": "GPL-3.0-or-later",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --linux deb AppImage",
+    "pack": "electron-builder --linux dir",
+    "icons": "node scripts/render-icons.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "electron": "^44.4.3",
+    "electron-builder": "^26.15.3"
+  },
+  "keywords": [
+    "whatsapp",
+    "linux",
+    "desktop",
+    "electron",
+    "messaging",
+    "unofficial"
+  ],
+  "build": {
+    "appId": "io.github.aschoube.whatsapp-unofficial",
+    "productName": "WhatsApp Unofficial",
+    "copyright": "Copyright (C) 2026 WhatsApp Unofficial contributors",
+    "files": [
+      "src/**/*",
+      "build/*.png",
+      "package.json",
+      "!**/*.md"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "Network;InstantMessaging",
+      "icon": "build/icon-512.png",
+      "synopsis": "Unofficial desktop client for WhatsApp Web",
+      "description": "An unofficial desktop client for WhatsApp Web, with system tray, native notifications, unread badges and multiple accounts. Not affiliated with or endorsed by Meta Platforms, Inc. or WhatsApp Inc.",
+      "desktop": {
+        "entry": {
+          "StartupWMClass": "whatsapp-unofficial",
+          "Keywords": "chat;messaging;im;"
+        }
+      },
+      "executableName": "whatsapp-unofficial",
+      "syncDesktopName": true
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1",
+        "libsecret-1-0",
+        "libasound2|libasound2t64"
+      ],
+      "maintainer": "Ashish Choubey <ashishch196@gmail.com>"
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
+  },
+  "author": {
+    "name": "Ashish Choubey",
+    "email": "ashishch196@gmail.com"
+  },
+  "homepage": "https://github.com/aschoube/whatsapp-unofficial",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aschoube/whatsapp-unofficial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aschoube/whatsapp-unofficial/issues"
+  },
+  "desktopName": "whatsapp-unofficial.desktop"
+}

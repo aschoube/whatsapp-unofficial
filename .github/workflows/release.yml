@@ -1,0 +1,43 @@
+name: release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Icons are generated rather than committed as binaries, so a change to
+      # the mark cannot silently fail to reach a release.
+      - run: npm run icons
+
+      - run: npx electron-builder --linux deb AppImage --publish never
+
+      # The AUR PKGBUILD builds from this tarball rather than unpacking the
+      # .deb, so publish it alongside the installers.
+      - name: Package unpacked build
+        run: |
+          cd dist/linux-unpacked
+          tar czf ../whatsapp-unofficial-${GITHUB_REF_NAME#v}-linux-x64.tar.gz .
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.deb
+            dist/*.AppImage
+            dist/*.tar.gz
+          generate_release_notes: true

@@ -1,0 +1,16 @@
+name: Translation
+description: Add or fix a translation
+labels: [translation, good first issue]
+body:
+  - type: input
+    id: locale
+    attributes: { label: Locale, placeholder: "hi, pt-BR, de" }
+    validations: { required: true }
+  - type: markdown
+    attributes:
+      value: |
+        Copy `src/i18n/en.json`, translate the values, and open a PR — or paste
+        the translated JSON below and someone will land it for you.
+  - type: textarea
+    id: json
+    attributes: { label: Translated JSON, render: json }
