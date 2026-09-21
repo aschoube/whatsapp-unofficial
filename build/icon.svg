@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Original mark. Deliberately shares nothing with WhatsApp's artwork:
+       no green, no circle, no speech tail, no phone handset. Two offset
+       panes read as a desktop conversation window. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5B54F0"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+
+  <!-- back pane -->
+  <rect x="150" y="116" width="248" height="168" rx="40" fill="#FFFFFF" opacity="0.34"/>
+
+  <!-- front pane -->
+  <rect x="114" y="204" width="284" height="192" rx="46" fill="#FFFFFF"/>
+
+  <!-- conversation dots -->
+  <g fill="#5B54F0">
+    <circle cx="188" cy="300" r="21"/>
+    <circle cx="256" cy="300" r="21"/>
+    <circle cx="324" cy="300" r="21"/>
+  </g>
+</svg>

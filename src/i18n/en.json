@@ -1,0 +1,19 @@
+{
+  "tray.toggle": "Show / hide window",
+  "tray.settings": "Settings",
+  "tray.reload": "Reload",
+  "tray.quit": "Quit",
+  "tray.unread": "{count} unread",
+  "tray.missing.title": "No system tray detected",
+  "tray.missing.message": "Close to tray has been turned off.",
+  "tray.missing.detail": "No tray was available, so closing the window would have hidden it with no way to get it back. On GNOME, installing the AppIndicator extension enables the tray.",
+  "menu.file": "File",
+  "menu.settings": "Settings",
+  "menu.reload": "Reload",
+  "menu.hide": "Hide window",
+  "menu.quit": "Quit",
+  "menu.edit": "Edit",
+  "menu.view": "View",
+  "menu.help": "Help",
+  "menu.project": "Project page"
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self';">
+<title>Settings</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="settings.css">
+</head>
+<body>
+<main>
+  <h1>Settings</h1>
+
+  <section>
+    <h2>Window</h2>
+    <label class="row"><input type="checkbox" data-pref="closeToTray"><span>Close to tray instead of quitting</span></label>
+    <label class="row"><input type="checkbox" data-pref="startMinimized"><span>Start minimised to tray</span></label>
+    <p class="note" id="tray-note" hidden>
+      No system tray was detected. On GNOME this usually means the AppIndicator
+      extension is not installed.
+    </p>
+  </section>
+
+  <section>
+    <h2>Downloads</h2>
+    <label class="row"><input type="checkbox" data-pref="askDownloadLocation"><span>Ask where to save each file</span></label>
+  </section>
+
+  <section>
+    <h2>Accounts</h2>
+    <ul id="accounts"></ul>
+    <button id="add-account" class="primary">Add account</button>
+    <p class="note">
+      Each account keeps its own separate login. You will be asked to scan a QR
+      code the first time you open a new one.
+    </p>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <p class="note" id="versions"></p>
+    <p class="note disclaimer">
+      An unofficial client. Not affiliated with, endorsed by, or connected to
+      Meta Platforms, Inc. or WhatsApp Inc. Using any unofficial client is a
+      deviation from WhatsApp's Terms of Service.
+    </p>
+  </section>
+</main>
+<script src="settings.js"></script>
+</body>
+</html>

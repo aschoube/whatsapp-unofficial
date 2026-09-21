@@ -1,0 +1,42 @@
+# Maintainer: Ashish Choubey <ashishch196@gmail.com>
+pkgname=whatsapp-unofficial-bin
+_pkgname=whatsapp-unofficial
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Unofficial desktop client for WhatsApp Web"
+arch=('x86_64')
+url="https://github.com/aschoube/whatsapp-unofficial"
+license=('GPL-3.0-or-later')
+# Electron pulls these in at runtime. A missing entry here installs fine and
+# then refuses to launch, which is the most common AUR bug report.
+depends=('gtk3' 'nss' 'libxss' 'alsa-lib' 'libnotify' 'libsecret' 'at-spi2-core' 'libxtst')
+optdepends=('libappindicator-gtk3: system tray support on GNOME')
+options=('!strip')
+source=("$_pkgname-$pkgver.tar.gz::$url/releases/download/v$pkgver/$_pkgname-$pkgver-linux-x64.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+  install -dm755 "$pkgdir/opt/$_pkgname"
+  cp -r "$srcdir"/* "$pkgdir/opt/$_pkgname/"
+  rm -f "$pkgdir/opt/$_pkgname/$_pkgname-$pkgver.tar.gz"
+
+  install -dm755 "$pkgdir/usr/bin"
+  ln -s "/opt/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+
+  install -Dm644 "$pkgdir/opt/$_pkgname/resources/app/build/icon-512.png" \
+    "$pkgdir/usr/share/icons/hicolor/512x512/apps/$_pkgname.png"
+
+  install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/$_pkgname.desktop" <<DESKTOP
+[Desktop Entry]
+Name=WhatsApp Unofficial
+Comment=Unofficial desktop client for WhatsApp Web
+Exec=/usr/bin/$_pkgname %U
+Icon=$_pkgname
+Type=Application
+Categories=Network;InstantMessaging;
+Keywords=chat;messaging;im;
+StartupWMClass=$_pkgname
+DESKTOP
+
+  chmod 4755 "$pkgdir/opt/$_pkgname/chrome-sandbox"
+}
