@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=WhatsApp Unofficial
+Comment=Unofficial desktop client for WhatsApp Web
+Exec=whatsapp-unofficial %U
+Icon=io.github.aschoube.whatsapp-unofficial
+Terminal=false
+Type=Application
+Categories=Network;InstantMessaging;
+Keywords=chat;messaging;im;
+StartupWMClass=whatsapp-unofficial

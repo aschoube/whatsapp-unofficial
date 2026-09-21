@@ -2,3 +2,7 @@ node_modules/
 dist/
 *.log
 .env
+.flatpak-build/
+repo/
+*.flatpak
+.flatpak-builder/

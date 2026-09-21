@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.aschoube.whatsapp-unofficial</id>
+  <name>WhatsApp Unofficial</name>
+  <summary>Desktop client for web messaging</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="io.github.aschoube">
+    <name>Ashish Choubey</name>
+  </developer>
+  <description>
+    <p>
+      An unofficial desktop client for WhatsApp Web, giving it the desktop
+      integration a browser tab cannot: a tray icon, native notifications,
+      unread badges and multiple independent accounts.
+    </p>
+    <p>
+      Not affiliated with, endorsed by, or connected to Meta Platforms, Inc.
+      or WhatsApp Inc.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.aschoube.whatsapp-unofficial.desktop</launchable>
+  <url type="homepage">https://github.com/aschoube/whatsapp-unofficial</url>
+  <url type="bugtracker">https://github.com/aschoube/whatsapp-unofficial/issues</url>
+  <url type="vcs-browser">https://github.com/aschoube/whatsapp-unofficial</url>
+
+  <!-- Flathub rejects submissions with no screenshot. These URLs must resolve
+       to real PNGs before the submission PR is opened; commit the files to
+       docs/screenshots/ on main. -->
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/conversation.png</image>
+      <caption>A conversation open in the desktop window</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/aschoube/whatsapp-unofficial/v0.1.0/docs/screenshots/tray.png</image>
+      <caption>Unread badge on the system tray icon</caption>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+  </content_rating>
+  <releases>
+    <release version="0.1.0" date="2026-09-21">
+      <url type="details">https://github.com/aschoube/whatsapp-unofficial/releases/tag/v0.1.0</url>
+      <description>
+        <p>First release.</p>
+      </description>
+    </release>
+  </releases>
+</component>

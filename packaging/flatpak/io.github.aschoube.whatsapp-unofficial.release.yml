@@ -1,0 +1,67 @@
+app-id: io.github.aschoube.whatsapp-unofficial
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '25.08'
+command: whatsapp-unofficial
+separate-locales: false
+
+finish-args:
+  # Kept to the minimum the app actually uses.
+  - --share=network
+  - --share=ipc               # required by Chromium's renderer processes
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio       # voice notes and calls; silent audio without it
+  - --device=dri
+  - --filesystem=xdg-download
+  - --talk-name=org.kde.StatusNotifierWatcher   # tray icon
+  - --talk-name=org.freedesktop.Notifications
+
+modules:
+  - name: whatsapp-unofficial
+    buildsystem: simple
+    build-options:
+      # Prebuilt Electron; stripping it breaks the crash handler and gains
+      # nothing, since the binaries ship without debug symbols already.
+      no-debuginfo: true
+      strip: false
+    build-commands:
+      - mkdir -p /app/main
+      - cp -r app/. /app/main/
+      # Electron must be launched through zypak so Chromium's sandbox maps onto
+      # Flatpak's; running the binary directly forces the --no-sandbox hack.
+      - install -Dm755 whatsapp-unofficial.sh /app/bin/whatsapp-unofficial
+      # Icons come from the source checkout: the app bundle keeps its copies
+      # inside app.asar, where the desktop's icon theme cannot reach them.
+      - |
+        for s in 16 24 32 48 64 96 128 256 512; do
+          install -Dm644 "src/build/icon-$s.png" \
+            "/app/share/icons/hicolor/${s}x${s}/apps/io.github.aschoube.whatsapp-unofficial.png"
+        done
+      - install -Dm644 io.github.aschoube.whatsapp-unofficial.desktop
+          /app/share/applications/io.github.aschoube.whatsapp-unofficial.desktop
+      - install -Dm644 io.github.aschoube.whatsapp-unofficial.metainfo.xml
+          /app/share/metainfo/io.github.aschoube.whatsapp-unofficial.metainfo.xml
+    sources:
+      # The release build, produced by `npm run pack` and attached to the tag.
+      # Flathub builds on its own infrastructure, so every source has to be
+      # fetchable over the network and pinned -- no local paths.
+      - type: archive
+        url: https://github.com/aschoube/whatsapp-unofficial/releases/download/v0.1.0/whatsapp-unofficial-0.1.0-linux-x64.tar.gz
+        sha256: 036c94bec3513e2005d7666034e6c23257ed191df9f4c25bedb3f712900b9644
+        dest: app
+      # Source checkout, for the icon ladder only.
+      - type: git
+        url: https://github.com/aschoube/whatsapp-unofficial.git
+        tag: v0.1.0
+        # TODO: replace with the commit v0.1.0 points at once the tag exists.
+        commit: 0000000000000000000000000000000000000000
+        dest: src
+      - type: file
+        path: whatsapp-unofficial.sh
+      - type: file
+        path: io.github.aschoube.whatsapp-unofficial.desktop
+      - type: file
+        path: io.github.aschoube.whatsapp-unofficial.metainfo.xml
