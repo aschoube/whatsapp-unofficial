@@ -23,8 +23,11 @@ package() {
   install -dm755 "$pkgdir/usr/bin"
   ln -s "/opt/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
 
-  install -Dm644 "$pkgdir/opt/$_pkgname/resources/app/build/icon-512.png" \
-    "$pkgdir/usr/share/icons/hicolor/512x512/apps/$_pkgname.png"
+  # Full hicolor ladder, so panels and launchers never have to resample.
+  for _size in 16 24 32 48 64 96 128 256 512; do
+    install -Dm644 "$pkgdir/opt/$_pkgname/resources/app/build/icon-$_size.png" \
+      "$pkgdir/usr/share/icons/hicolor/${_size}x${_size}/apps/$_pkgname.png"
+  done
 
   install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/$_pkgname.desktop" <<DESKTOP
 [Desktop Entry]
