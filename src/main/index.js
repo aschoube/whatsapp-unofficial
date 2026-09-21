@@ -9,6 +9,7 @@ const { AppTray } = require('./tray');
 const { buildMenu } = require('./menu');
 const { openSettings } = require('./settings-window');
 const { chromeUserAgent } = require('./user-agent');
+const { acquireSingleInstance } = require('./single-instance');
 
 // Wayland sessions need this hint or the window misbehaves. Harmless on X11.
 app.commandLine.appendSwitch('ozone-platform-hint', 'auto');
@@ -100,52 +101,56 @@ function registerIpc() {
   ipcMain.handle('settings:open', () => showSettings());
 }
 
-if (!app.requestSingleInstanceLock()) {
-  app.quit();
-} else {
-  app.on('second-instance', () => {
+app.whenReady().then(async () => {
+  // Our own lock, not Electron's: Electron's keeps its socket under /tmp,
+  // which Flatpak makes private per instance, so every launch would start
+  // another copy on the same Chromium profile and corrupt it.
+  const primary = await acquireSingleInstance(() => {
     if (mainWindow) mainWindow.show();
   });
 
-  app.whenReady().then(() => {
-    config = new Config();
-    i18n = new I18n(config.get('prefs.locale'));
-    accounts = new AccountManager(config);
-    mainWindow = new MainWindow(config, accounts);
+  if (!primary) {
+    app.quit();
+    return;
+  }
 
-    tray = new AppTray({
-      config,
-      accounts,
-      mainWindow,
-      i18n,
-      onSettings: showSettings,
-      onQuit: quit
-    });
+  config = new Config();
+  i18n = new I18n(config.get('prefs.locale'));
+  accounts = new AccountManager(config);
+  mainWindow = new MainWindow(config, accounts);
 
-    buildMenu({ accounts, mainWindow, i18n, onSettings: showSettings, onQuit: quit });
-    registerIpc();
+  tray = new AppTray({
+    config,
+    accounts,
+    mainWindow,
+    i18n,
+    onSettings: showSettings,
+    onQuit: quit
+  });
 
-    accounts.on('unread-changed', (total) => {
-      tray.setUnread(total);
-      mainWindow.refreshSidebar();
-    });
+  buildMenu({ accounts, mainWindow, i18n, onSettings: showSettings, onQuit: quit });
+  registerIpc();
 
-    accounts.activate(config.accounts[0].id);
-    mainWindow.layout();
+  accounts.on('unread-changed', (total) => {
+    tray.setUnread(total);
     mainWindow.refreshSidebar();
-
-    if (!config.get('prefs.startMinimized')) mainWindow.show();
-    warnIfNoTray();
   });
 
-  app.on('window-all-closed', () => {
-    // With close-to-tray off there is no tray to restore from, so the app
-    // should actually exit rather than linger with no visible surface.
-    if (!config || !config.get('prefs.closeToTray')) app.quit();
-  });
+  accounts.activate(config.accounts[0].id);
+  mainWindow.layout();
+  mainWindow.refreshSidebar();
 
-  app.on('before-quit', () => {
-    if (mainWindow) mainWindow.quitting = true;
-    if (tray) tray.destroy();
-  });
-}
+  if (!config.get('prefs.startMinimized')) mainWindow.show();
+  warnIfNoTray();
+});
+
+app.on('window-all-closed', () => {
+  // With close-to-tray off there is no tray to restore from, so the app
+  // should actually exit rather than linger with no visible surface.
+  if (!config || !config.get('prefs.closeToTray')) app.quit();
+});
+
+app.on('before-quit', () => {
+  if (mainWindow) mainWindow.quitting = true;
+  if (tray) tray.destroy();
+});
