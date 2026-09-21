@@ -1,7 +1,7 @@
 # Maintainer: Ashish Choubey <ashishch196@gmail.com>
 pkgname=whatsapp-unofficial-bin
 _pkgname=whatsapp-unofficial
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="Unofficial desktop client for WhatsApp Web"
 arch=('x86_64')

@@ -38,6 +38,16 @@
     <content_attribute id="social-chat">intense</content_attribute>
   </content_rating>
   <releases>
+    <release version="0.1.1" date="2026-09-21">
+      <url type="details">https://github.com/aschoube/whatsapp-unofficial/releases/tag/v0.1.1</url>
+      <description>
+        <p>
+          Fixes duplicate instances running against the same profile under
+          Flatpak, which could corrupt the stored session and force a new QR
+          scan.
+        </p>
+      </description>
+    </release>
     <release version="0.1.0" date="2026-09-21">
       <url type="details">https://github.com/aschoube/whatsapp-unofficial/releases/tag/v0.1.0</url>
       <description>

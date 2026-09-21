@@ -1,7 +1,7 @@
 {
   "name": "whatsapp-unofficial",
   "productName": "WhatsApp Unofficial",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An unofficial desktop client for WhatsApp Web on Linux",
   "license": "GPL-3.0-or-later",
   "main": "src/main/index.js",
